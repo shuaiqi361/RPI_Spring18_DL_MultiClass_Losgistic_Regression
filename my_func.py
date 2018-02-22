@@ -13,9 +13,7 @@ def compute_softmax(w, data):
     # output a m * 5 softmax matrix and the argmax for each row
     exp_terms = tf.exp(tf.matmul(data, w))
 
-    # Exp normailze trick to avoid numerical overflow
-    b = tf.reduce_max(exp_terms, axis=1, keepdims=True)
-    prob = (exp_terms) / tf.reduce_sum(exp_terms, axis=1, keepdims=True)
+    prob = exp_terms / tf.reduce_sum(exp_terms, axis=1, keepdims=True)
     max_ind = tf.argmax(prob, axis=1)
     
     return prob, max_ind
